@@ -34,6 +34,9 @@ def store_data(type: str, amount: float, category: str, description: str, date: 
     # Append data new transaction to data_tracker
     data_tracker.append(new_transaction)
 
+    # Seriazed data_tracker before write to json
+    serialized_data = json.dumps(data_tracker, indent=2)
+
     # Write data_tracker to json
 
 # Function create subcommand for command "add"
@@ -111,7 +114,7 @@ def parser():
 def main():
     # Create root folder for tracker
     os.makedirs(ROOT_TRACKER_DIR, exist_ok=True)
-    
+
     parser()
 
 if __name__ == "__main__":
