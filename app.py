@@ -15,6 +15,8 @@ def create_subcommand_add(parser: argparse._SubParsersAction, name: str, help: s
     subcommand.add_argument("--description", "-d", default="")
     subcommand.add_argument("--date", required=True)
 
+    subcommand.set_defaults(func=add_func)
+
 def add_func(args: argparse.Namespace):
     # Variable
     type_input = args.subcommand
@@ -55,7 +57,6 @@ def parser():
     add_subcommand = add_command.add_subparsers(dest="subcommand")
     create_subcommand_add(add_subcommand, "expense", "Add Expense to tracker")
     create_subcommand_add(add_subcommand, "income", "Add Income to tracker")
-    add_command.set_defaults(func=add_func)
 
     args = parser.parse_args()
 
