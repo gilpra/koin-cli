@@ -24,14 +24,19 @@ def add_func(args: argparse.Namespace):
     date_input = args.date
 
     # Print confirmation store data
-    print(f"\n>> Confirm Data")
-    print(f"Type: {type_input.capitalize()}")
-    print(f"Amount: {amount_input}")
-    print(f"Category: {category_input.capitalize()}")
-    print(f"Description: {description_input}")
-    print(f"Date : {date_input}")
-    confirm = input("Are you sure want store this data (Y/n): ")
-    confirm = confirm.lower().strip()
+    print("\n" + "=" * 36)
+    print("      TRANSACTION CONFIRMATION")
+    print("=" * 36)
+
+    print(f"{'Type':<12}: {type_input.title()}")
+    print(f"{'Amount':<12}: {amount_input}")
+    print(f"{'Category':<12}: {category_input.title()}")
+    print(f"{'Description':<12}: {description_input or '-'}")
+    print(f"{'Date':<12}: {date_input}")
+
+    print("=" * 36)
+
+    confirm = input("Save this transaction? [Y/n]: ").strip().lower()
 
     # Confirm logic
     if confirm in ["", "y", "yes"]:
