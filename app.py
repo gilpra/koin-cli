@@ -6,9 +6,17 @@ def parser():
     # Create command
     command = parser.add_subparsers(dest="command")
 
+    # Add command
+    command.add_parser("add", help="Add a transaction")
+
     args = parser.parse_args()
 
-    parser.print_help()
+    # Check command input
+    command_input = args.command
+    if command_input == "add":
+        print("Run add function")
+    else:
+        parser.print_help()
 
 def main():
     parser()
