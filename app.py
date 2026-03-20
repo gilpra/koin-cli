@@ -1,5 +1,20 @@
 import argparse
 from datetime import datetime
+import os
+import json
+
+ROOT_TRACKER_DIR = os.path.expanduser("~/.local/share/koin")
+DATABASE_PATH = os.path.join(ROOT_TRACKER_DIR, "tracker.json")
+
+# Read database
+def read_database() -> dict:
+    # Check if database exist
+    if not os.path.exists(DATABASE_PATH):
+        return {}
+
+    # Read database
+    with open(DATABASE_PATH, "r") as file:
+        return json.load(file)
 
 def store_data(type: str, amount: float, category: str, description: str, date: str):
     date_now = datetime.now()# Get time now
@@ -94,6 +109,9 @@ def parser():
         parser.print_help()
 
 def main():
+    # Create root folder for tracker
+    os.makedirs(ROOT_TRACKER_DIR, exist_ok=True)
+    
     parser()
 
 if __name__ == "__main__":
