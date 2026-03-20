@@ -1,4 +1,25 @@
 import argparse
+from datetime import datetime
+
+def store_data(type: str, amount: float, category: str, description: str, date: str):
+    date_now = datetime.now()# Get time now
+    data_tracker = [] # Read data from database
+
+    # Set dict for new transaction
+    new_transaction = {
+              "id": 1,
+              "type": type,
+              "amount": amount,
+              "category": category,
+              "description": description,
+              "date": date,
+              "created_at": date_now.isoformat()
+           }
+
+    # Append data new transaction to data_tracker
+    data_tracker.append(new_transaction)
+
+    # Write data_tracker to json
 
 # Function create subcommand for command "add"
 def create_subcommand_add(parser: argparse._SubParsersAction, name: str, help: str):
@@ -42,9 +63,15 @@ def add_func(args: argparse.Namespace):
 
     # Confirm logic
     if confirm in ["", "y", "yes"]:
-        print("Store data")
+        print("\nStoring data...")
+        store_data(type=type_input,
+           amount=amount_input,
+           category=category_input,
+           description=description_input,
+           date=date_input)
     else:
-        print("Cancel")
+        print(f"\nCancel transaction!")
+
 
 def parser():
     # Create parser for command
