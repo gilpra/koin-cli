@@ -2,7 +2,18 @@ import argparse
 
 # Function create subcommand for command "add"
 def create_subcommand_add(parser: argparse._SubParsersAction, name: str, help: str):
-    parser.add_parser(name, help=help)
+    VALID_CATEGORY={
+        "expense": ["food", "transport", "shopping", "biils", "other"],
+        "income": ["salary", "business", "investment", "gift", "other"]
+    }
+
+    subcommand = parser.add_parser(name, help=help)
+
+    # Create argument
+    subcommand.add_argument("--amount", "-a", required=True, type=int)
+    subcommand.add_argument("--category", "-c", default="other", choices=VALID_CATEGORY[name])
+    subcommand.add_argument("--description", "-d", default="")
+    subcommand.add_argument("--date", required=True)
 
 def parser():
     # Create parser for command
