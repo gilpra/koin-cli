@@ -10,10 +10,34 @@ def create_subcommand_add(parser: argparse._SubParsersAction, name: str, help: s
     subcommand = parser.add_parser(name, help=help)
 
     # Create argument
-    subcommand.add_argument("--amount", "-a", required=True, type=int)
+    subcommand.add_argument("--amount", "-a", required=True, type=float)
     subcommand.add_argument("--category", "-c", default="other", choices=VALID_CATEGORY[name])
     subcommand.add_argument("--description", "-d", default="")
     subcommand.add_argument("--date", required=True)
+
+def add_func(args: argparse.Namespace):
+    # Variable
+    type_input = args.subcommand
+    amount_input = args.amount
+    category_input = args.category
+    description_input = args.description
+    date_input = args.date
+
+    # Print confirmation store data
+    print(f"\n>> Confirm Data")
+    print(f"Type: {type_input.capitalize()}")
+    print(f"Amount: {amount_input}")
+    print(f"Category: {category_input.capitalize()}")
+    print(f"Description: {description_input}")
+    print(f"Date : {date_input}")
+    confirm = input("Are you sure want store this data (Y/n): ")
+    confirm = confirm.lower().strip()
+
+    # Confirm logic
+    if confirm in ["", "y", "yes"]:
+        print("Store data")
+    else:
+        print("Cancel")
 
 def parser():
     # Create parser for command
@@ -26,13 +50,13 @@ def parser():
     add_subcommand = add_command.add_subparsers(dest="subcommand")
     create_subcommand_add(add_subcommand, "expense", "Add Expense to tracker")
     create_subcommand_add(add_subcommand, "income", "Add Income to tracker")
+    add_command.set_defaults(func=add_func)
 
     args = parser.parse_args()
 
     # Check command input
-    command_input = args.command
-    if command_input == "add":
-        print("Run add function")
+    if hasattr(args, "func"):
+        args.func(args)
     else:
         parser.print_help()
 
