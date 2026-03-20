@@ -7,10 +7,10 @@ ROOT_TRACKER_DIR = os.path.expanduser("~/.local/share/koin")
 DATABASE_PATH = os.path.join(ROOT_TRACKER_DIR, "tracker.json")
 
 # Read database
-def read_database() -> dict:
+def read_database() -> list:
     # Check if database exist
     if not os.path.exists(DATABASE_PATH):
-        return {}
+        return []
 
     # Read database
     with open(DATABASE_PATH, "r") as file:
@@ -18,7 +18,7 @@ def read_database() -> dict:
 
 def store_data(type: str, amount: float, category: str, description: str, date: str):
     date_now = datetime.now()# Get time now
-    data_tracker = [] # Read data from database
+    data_tracker = read_database() # Read data from database
 
     # Set dict for new transaction
     new_transaction = {
@@ -38,6 +38,8 @@ def store_data(type: str, amount: float, category: str, description: str, date: 
     serialized_data = json.dumps(data_tracker, indent=2)
 
     # Write data_tracker to json
+    with open(DATABASE_PATH, 'w', encoding="utf-8") as file:
+        file.write(serialized_data)
 
 # Function create subcommand for command "add"
 def create_subcommand_add(parser: argparse._SubParsersAction, name: str, help: str):
@@ -81,7 +83,7 @@ def add_func(args: argparse.Namespace):
 
     # Confirm logic
     if confirm in ["", "y", "yes"]:
-        print("\nStoring data...")
+        print(f"\nStoring data...")
         store_data(type=type_input,
            amount=amount_input,
            category=category_input,
@@ -89,7 +91,6 @@ def add_func(args: argparse.Namespace):
            date=date_input)
     else:
         print(f"\nCancel transaction!")
-
 
 def parser():
     # Create parser for command
