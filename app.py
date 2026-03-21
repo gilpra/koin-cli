@@ -19,10 +19,14 @@ def read_database() -> list:
 def store_data(type: str, amount: float, category: str, description: str, date: str):
     date_now = datetime.now()# Get time now
     data_tracker = read_database() # Read data from database
+    last_id = 0
+
+    if data_tracker:
+        last_id = data_tracker[-1].get("id", 0)
 
     # Set dict for new transaction
     new_transaction = {
-              "id": 1,
+              "id": last_id + 1,
               "type": type,
               "amount": amount,
               "category": category,
