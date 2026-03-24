@@ -19,6 +19,16 @@ def read_database() -> list:
     with open(con.DATABASE_PATH, "r") as file:
         return json.load(file)
 
+def get_transaction_by_id(id: int) -> dict:
+    data_tracker = read_database()
+    transaction_detail = {}
+
+    for transaction in data_tracker:
+        if transaction["id"] == id:
+            transaction_detail = transaction
+
+    return transaction_detail
+
 def store_data(type: str, amount: float, category: str, description: str, date: str):
     date_now = datetime.now()# Get time now
     data_tracker = read_database() # Read data from database
