@@ -3,6 +3,12 @@ import json
 from datetime import datetime
 import constant as con
 
+# Initial Database
+def initial_database():
+    if not os.path.exists(con.ROOT_TRACKER_DIR):
+        # Create root folder for tracker
+        os.makedirs(con.ROOT_TRACKER_DIR, exist_ok=True)
+
 # Read database
 def read_database() -> list:
     # Check if database exist
