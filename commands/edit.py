@@ -17,5 +17,11 @@ def edit_func(args: argparse.Namespace):
     if args.date:
         date = args.date
 
-    # Update data tracker
-    update_data(id, amount=amount, description=description, date=date)
+    confirm = input("Update this transaction? [Y/n]: ").strip().lower()
+    # Confirm logic
+    if confirm in ["", "y", "yes"]:
+        print(f"\nUpdating data...")
+        # Update data tracker
+        update_data(id, amount=amount, description=description, date=date)
+    else:
+        print(f"\nCancel update transaction!")
