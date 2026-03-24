@@ -29,6 +29,17 @@ def get_transaction_by_id(id: int) -> dict:
 
     return transaction_detail
 
+def get_index_by_id(id: int) -> int:
+    data_tracker = read_database()
+    index = 0
+
+    for transaction in data_tracker:
+        if transaction["id"] == id:
+            return index
+        index += 1
+
+    return index
+
 def store_data(type: str, amount: float, category: str, description: str, date: str):
     date_now = datetime.now()# Get time now
     data_tracker = read_database() # Read data from database
@@ -58,4 +69,18 @@ def store_data(type: str, amount: float, category: str, description: str, date: 
     with open(con.DATABASE_PATH, 'w', encoding="utf-8") as file:
         file.write(serialized_data)
 
+def update_data(id: int, amount: float, description: str, date: str):
+    data_tracker = read_database()  # Read data from database
+    index = get_index_by_id(id) # Get data index based on id
 
+    # Change data based on id
+    data_tracker[index]["amount"] = amount
+    data_tracker[index]["description"] = description
+    data_tracker[index]["date"] = date
+
+    # Seriazed data_tracker before write to json
+    serialized_data = json.dumps(data_tracker, indent=2)
+
+    # Write data_tracker to json
+    with open(con.DATABASE_PATH, 'w', encoding="utf-8") as file:
+        file.write(serialized_data)
