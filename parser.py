@@ -1,5 +1,6 @@
 import argparse
 from commands.add import add_func
+from commands.list import list_func
 from constant import VALID_CATEGORY
 
 # Function create subcommand for command "add"
@@ -25,6 +26,10 @@ def parser():
     add_subcommand = add_command.add_subparsers(dest="subcommand")
     create_subcommand_add(add_subcommand, "expense", "Add Expense to tracker")
     create_subcommand_add(add_subcommand, "income", "Add Income to tracker")
+
+    # List command
+    list_command = command.add_parser("list", help="List transactions")
+    list_command.set_defaults(func=list_func)
 
     args = parser.parse_args()
 
