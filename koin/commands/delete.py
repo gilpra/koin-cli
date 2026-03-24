@@ -7,8 +7,11 @@ def delete_func(args: argparse.Namespace):
     confirm = input("Delete this transaction? [Y/n]: ").strip().lower()
     # Confirm logic
     if confirm in ["", "y", "yes"]:
-        print(f"\nDeleting data...")
         # Delete data tracker
-        delete_data(id)
+        try:
+            delete_data(id)
+            print(f"\nDeleting data...")
+        except ValueError as e:
+            print(f"\nError: {e}")
     else:
         print(f"\nCancel delete transaction!")

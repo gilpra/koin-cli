@@ -31,12 +31,13 @@ def get_transaction_by_id(id: int) -> dict:
 
 def get_index_by_id(id: int) -> int:
     data_tracker = read_database()
-    index = 0
+    index = 9999
 
+    i = 0
     for transaction in data_tracker:
         if transaction["id"] == id:
-            return index
-        index += 1
+            index = i
+        i += 1
 
     return index
 
@@ -88,7 +89,10 @@ def update_data(id: int, amount: float, description: str, date: str):
 def delete_data(id: int):
     data_tracker = read_database()
     index = get_index_by_id(id)
-    
+
+    if index > len(data_tracker):
+        raise ValueError("ID transaction not found")
+
     del data_tracker[index]
 
     # Seriazed data_tracker before write to json

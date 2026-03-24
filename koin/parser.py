@@ -50,7 +50,7 @@ def parser():
 
     # Delete command
     delete_command = command.add_parser("delete", help="Delete a transaction")
-    delete_command.add_argument("id", help="ID transaction")
+    delete_command.add_argument("id", help="ID transaction", type=int)
     delete_command.set_defaults(func=delete_func)
 
     args = parser.parse_args()
