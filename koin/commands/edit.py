@@ -5,6 +5,10 @@ def edit_func(args: argparse.Namespace):
     id = int(args.id)
     data_tracker = get_transaction_by_id(id) # Get data transaction based on id
 
+    if not data_tracker:
+        print("\nError: ID transaction not found")
+        return
+
     amount = data_tracker["amount"]
     description = data_tracker["description"]
     date = data_tracker["date"]

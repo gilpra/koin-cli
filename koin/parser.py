@@ -42,7 +42,7 @@ def parser():
 
     # Edit command
     edit_command = command.add_parser("edit", help="Edit a transaction")
-    edit_command.add_argument("id", help="ID transaction")
+    edit_command.add_argument("id", help="ID transaction", type=int)
     edit_command.add_argument("--amount", "-a", type=float)
     edit_command.add_argument("--description", "-d", default="")
     edit_command.add_argument("--date")
