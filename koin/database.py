@@ -1,7 +1,7 @@
 import os
 import json
 from datetime import datetime
-import constant as con
+import koin.constant as con
 
 # Initial Database
 def initial_database():

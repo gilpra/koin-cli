@@ -1,5 +1,5 @@
 import argparse
-from database import store_data
+from koin.database import store_data
 
 def add_func(args: argparse.Namespace):
     # Variable

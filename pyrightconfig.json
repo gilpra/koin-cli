@@ -1,4 +1,7 @@
 {
+    "include": [
+        "koin"
+    ],
     "exclude": [
         "**/__pycache__",
         "**/.venv",

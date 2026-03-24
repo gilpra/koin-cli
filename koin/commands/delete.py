@@ -1,5 +1,5 @@
 import argparse
-from database import delete_data
+from koin.database import delete_data
 
 def delete_func(args: argparse.Namespace):
     id = int(args.id)

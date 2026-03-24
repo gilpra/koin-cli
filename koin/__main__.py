@@ -1,5 +1,5 @@
-from parser import parser
-from database import initial_database
+from koin.parser import parser
+from koin.database import initial_database
 
 def main():
     initial_database()

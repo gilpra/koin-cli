@@ -1,10 +1,10 @@
 import argparse
-from commands.add import add_func
-from commands.list import list_func
-from commands.show import show_func
-from commands.edit import edit_func
-from commands.delete import delete_func
-from constant import VALID_CATEGORY
+from koin.commands.add import add_func
+from koin.commands.list import list_func
+from koin.commands.show import show_func
+from koin.commands.edit import edit_func
+from koin.commands.delete import delete_func
+from koin.constant import VALID_CATEGORY
 
 # Function create subcommand for command "add"
 def create_subcommand_add(parser: argparse._SubParsersAction, name: str, help: str):

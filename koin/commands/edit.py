@@ -1,5 +1,5 @@
 import argparse
-from database import get_transaction_by_id, update_data
+from koin.database import get_transaction_by_id, update_data
 
 def edit_func(args: argparse.Namespace):
     id = int(args.id)

@@ -1,5 +1,5 @@
 import argparse
-from database import get_transaction_by_id
+from koin.database import get_transaction_by_id
 
 def show_func(args: argparse.Namespace):
     detail_transaction = get_transaction_by_id(int(args.id))

@@ -1,5 +1,5 @@
 import argparse
-from database import read_database
+from koin.database import read_database
 
 def list_func(args: argparse.Namespace):
     data_tracker = read_database()
