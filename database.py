@@ -84,3 +84,16 @@ def update_data(id: int, amount: float, description: str, date: str):
     # Write data_tracker to json
     with open(con.DATABASE_PATH, 'w', encoding="utf-8") as file:
         file.write(serialized_data)
+
+def delete_data(id: int):
+    data_tracker = read_database()
+    index = get_index_by_id(id)
+
+    del data_tracker[index]
+
+    # Seriazed data_tracker before write to json
+    serialized_data = json.dumps(data_tracker, indent=2)
+
+    # Write data_tracker to json
+    with open(con.DATABASE_PATH, 'w', encoding="utf-8") as file:
+        file.write(serialized_data)

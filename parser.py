@@ -3,6 +3,7 @@ from commands.add import add_func
 from commands.list import list_func
 from commands.show import show_func
 from commands.edit import edit_func
+from commands.delete import delete_func
 from constant import VALID_CATEGORY
 
 # Function create subcommand for command "add"
@@ -45,6 +46,11 @@ def parser():
     edit_command.add_argument("--description", "-d", default="")
     edit_command.add_argument("--date")
     edit_command.set_defaults(func=edit_func)
+
+    # Delete command
+    delete_command = command.add_parser("delete", help="Delete a transaction")
+    delete_command.add_argument("id", help="ID transaction")
+    delete_command.set_defaults(func=delete_func)
 
     args = parser.parse_args()
 
