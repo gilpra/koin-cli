@@ -1,6 +1,6 @@
 import os
 import json
-from datetime import datetime
+from datetime import datetime, date
 import koin.constant as con
 
 # Initial Database
@@ -40,7 +40,7 @@ def get_index_by_id(id: int) -> int:
 
     return index
 
-def store_data(type: str, amount: float, category: str, description: str, date: str):
+def store_data(type: str, amount: float, category: str, description: str, date: date):
     date_now = datetime.now()# Get time now
     data_tracker = read_database() # Read data from database
     last_id = 0
@@ -55,7 +55,7 @@ def store_data(type: str, amount: float, category: str, description: str, date: 
               "amount": amount,
               "category": category,
               "description": description,
-              "date": date,
+              "date": str(date),
               "created_at": date_now.isoformat()
            }
 
@@ -88,7 +88,7 @@ def update_data(id: int, amount: float, description: str, date: str):
 def delete_data(id: int):
     data_tracker = read_database()
     index = get_index_by_id(id)
-
+    
     del data_tracker[index]
 
     # Seriazed data_tracker before write to json

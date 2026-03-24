@@ -1,4 +1,5 @@
 import argparse
+import datetime
 from koin.commands.add import add_func
 from koin.commands.list import list_func
 from koin.commands.show import show_func
@@ -14,7 +15,7 @@ def create_subcommand_add(parser: argparse._SubParsersAction, name: str, help: s
     subcommand.add_argument("--amount", "-a", required=True, type=float)
     subcommand.add_argument("--category", "-c", default="other", choices=VALID_CATEGORY[name])
     subcommand.add_argument("--description", "-d", default="")
-    subcommand.add_argument("--date", required=True)
+    subcommand.add_argument("--date", required=True, type=datetime.date.fromisoformat)
 
     subcommand.set_defaults(func=add_func)
 
